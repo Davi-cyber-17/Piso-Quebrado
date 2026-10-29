@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#050914">
+<title>Piso Quebrado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="scr on" id="main">
+  <h1>Piso<br>Quebrado<small>ICE PROTOCOL</small></h1>
+  <p class="sub">Cada passo racha o gelo: inteiro → rachado → quase quebrando → quebrado. Ficar parado 3 segundos também quebra o piso! Seja o último pinguim em pé e vença 3 rodadas.</p>
+  <button class="btn g" onclick="show('online')">Modo Online</button>
+  <button class="btn" onclick="show('local')">Modo Local</button>
+  <p class="sub">PC: setas ou WASD (toque = 1 passo, segure = andar) · Celular: botões na tela ou deslize o dedo</p>
+</div>
+
+<div class="scr" id="local">
+  <h2>Modo Local</h2>
+  <div class="panel">
+    <div class="row">Humanos <select id="lh"><option>1</option><option>2</option></select></div>
+    <div class="row">Total <select id="lt"><option>1</option><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option></select></div>
+    <p class="sub">Vagas restantes viram bots. Com 2 humanos: Jogador 1 usa as setas, Jogador 2 usa WASD.</p>
+  </div>
+  <button class="btn g" onclick="startLocal()">Jogar</button>
+  <button class="btn w" onclick="show('main')">Voltar</button>
+</div>
+
+<div class="scr" id="online">
+  <h2>Modo Online</h2>
+  <p class="sub">Funciona entre qualquer aparelho: PC, celular e tablet jogam juntos na mesma sala.</p>
+  <button class="btn g" onclick="hostRoom()">Criar sala</button>
+  <div class="panel">
+    <input id="jc" maxlength="4" placeholder="CÓDIGO" autocomplete="off" autocapitalize="characters">
+    <button class="btn" onclick="joinRoom()">Entrar na sala</button>
+  </div>
+  <div id="st"></div>
+  <button class="btn w" onclick="location.reload()">Voltar</button>
+</div>
+
+<div class="scr" id="lobby">
+  <h2>Sala</h2>
+  <div id="code">----</div>
+  <button class="btn m" id="cpy" onclick="copyInvite()">Copiar link de convite</button>
+  <div class="panel">
+    <div id="plist"></div>
+    <div class="row" id="hostopts">Total <select id="ot"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option selected>6</option></select></div>
+    <p class="sub" id="waitmsg"></p>
+  </div>
+  <button class="btn g" id="startbtn" onclick="startOnline()">Começar</button>
+  <button class="btn w" onclick="location.reload()">Sair</button>
+</div>
+
+<div id="game">
+  <div class="bar" id="top"></div>
+  <div id="stage">
+    <canvas id="cv"></canvas><div id="msg"></div>
+    <div class="pad" id="pad0" data-p="0"><button data-d="0">▲</button><button data-d="3">◀</button><button data-d="1">▶</button><button data-d="2">▼</button></div><div class="pad" id="pad1" data-p="1"><button data-d="0">▲</button><button data-d="3">◀</button><button data-d="1">▶</button><button data-d="2">▼</button></div>
+  </div>
+  <div class="bar" id="bot"></div>
+  <button class="ib" id="x" onclick="if(confirm('Sair da partida?'))location.reload()">×</button>
+  <button class="ib" id="padt" onclick="document.body.classList.toggle('pads')">✥</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
